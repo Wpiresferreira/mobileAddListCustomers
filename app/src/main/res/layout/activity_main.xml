@@ -108,6 +108,7 @@
                     android:hint="@string/last_name"
                     android:inputType="text"
                     android:text="" />
+
             </FrameLayout>
 
             <Space
@@ -140,6 +141,16 @@
                     android:hint="@string/dd_mm_yyy"
                     android:inputType="text"
                     android:text="" />
+
+                <TextView
+                    android:id="@+id/text_CalendarIco"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:fontFamily="@font/fontawesome"
+                    android:padding="18dp"
+                    android:text="@string/calendar"
+                    android:textSize="18sp" />
 
 
             </FrameLayout>

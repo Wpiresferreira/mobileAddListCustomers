@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText firstName, lastName, birthday, phoneNumber, email;
     DatePickerDialog datePickerDialog;
-    TextView text_Validate;
+    TextView text_Validate, text_CalendarIco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         phoneNumber = findViewById(R.id.edit_PhoneNumber);
         email = findViewById(R.id.edit_Email);
         text_Validate = findViewById(R.id.text_Validate);
+        text_CalendarIco = findViewById(R.id.text_CalendarIco);
 
         phoneNumber.addTextChangedListener(new TextWatcher() {
             @Override
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        birthday.setOnClickListener(v -> {
+        text_CalendarIco.setOnClickListener(v -> {
             final Calendar c = Calendar.getInstance();
             int mYear = c.get(Calendar.YEAR); // current year
             int mMonth = c.get(Calendar.MONTH); // current month
