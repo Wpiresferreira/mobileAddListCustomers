@@ -25,6 +25,7 @@ import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     DatePickerDialog datePickerDialog;
     TextView text_Validate, text_CalendarIco;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         initialize();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void initialize() {
 
         firstName = findViewById(R.id.edit_FirstName);
@@ -100,9 +103,23 @@ public class MainActivity extends AppCompatActivity {
 
         text_CalendarIco.setOnClickListener(v -> {
             final Calendar c = Calendar.getInstance();
-            int mYear = c.get(Calendar.YEAR); // current year
-            int mMonth = c.get(Calendar.MONTH); // current month
-            int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+
+            int mYear;
+            int mMonth;
+            int mDay;
+
+                if(isValidDate(birthday.getText().toString())){
+
+                    String[] dateSeparated = birthday.getText().toString().split("/");
+                    mYear= Integer.parseInt(dateSeparated[2]);
+                    mMonth  = Integer.parseInt(dateSeparated[1])-1;
+                    mDay = Integer.parseInt(dateSeparated[0]);
+
+                }else {
+                    mYear = c.get(Calendar.YEAR); // current year
+                    mMonth = c.get(Calendar.MONTH); // current month
+                    mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+                }
             // date picker dialog
             datePickerDialog = new DatePickerDialog(MainActivity.this, R.style.MySpinnerDatePickerStyle,
                     (view, year, monthOfYear, dayOfMonth) -> {
@@ -111,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
                         birthday.setText(displayedText);
 
                     }, mYear, mMonth, mDay);
+            datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
             datePickerDialog.show();
 
 
